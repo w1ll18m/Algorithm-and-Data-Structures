@@ -23,5 +23,5 @@ class Solution(object):
         
         return answer
 
-        # Hint: observe that nums[i] can be calculated by multiplying its left product and right product
+        # hint: observe that nums[i] can be calculated by multiplying its left product and right product
         
