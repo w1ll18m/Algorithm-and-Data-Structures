@@ -32,6 +32,8 @@ class Solution(object):
         return max_profit
         
         '''
+        pattern: find the subarray with the max profit -> sliding window
+
         find the window such that the last element minus the first element gives the greatest value
         condition to stop expanding the window: see a value less than the left pointer
         while expanding: keep track of the largest value seen thus far
