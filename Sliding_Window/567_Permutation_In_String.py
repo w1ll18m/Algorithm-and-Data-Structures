@@ -25,16 +25,16 @@ class Solution(object):
                     lofsubstring += 1
 
                 else:
-                    while s2[left] != s2[right]:
-                        curcount[s2[left]] += 1
-                        lofsubstring -= 1
+                    while s2[left] != s2[right]:                # move left pointer to first instance of the character
+                        curcount[s2[left]] += 1                 # update the count as left pointer is being moved
+                        lofsubstring -= 1                       # update the lenofsubstring as left pointer is being moved       
                         left += 1
-                    left += 1
+                    left += 1                                   # need to increment left by 1 since we want to move it past the first instance
             
             else:
-                curcount = dict(count)
+                curcount = dict(count)                          # reset count
                 lofsubstring = 0
-                left = right + 1
+                left = right + 1                                # move the left pointer past the character not part of the permutation
             
             if lofsubstring == len(s1):
                 return True
@@ -46,11 +46,13 @@ class Solution(object):
 
         '''
         permutation is like an anagram -> use hashmaps to count nof characters
-        keep left pointer for beginning of substring and right pointer for current position in string 2
+        keep left pointer for beginning of substring and right pointer for current position in string 2 -> use sliding window
+        both left and right pointers only increment by 1 -> iterate through max 2n characters where n is len(s2) -> O(n) time complexity
+
         iterate through string 2:
             - if character matches a character in string 1 then subtract count in hashmap
             - if character does not match a character in string 1 then reset count
-            - if character matches but count for that character is already 0 then move left pointer to first instance of that character
+            - if character matches but count for that character is already 0 then move left pointer past the first instance of that character
                 - update the count along the way
             - if length of the substring is the same as the length of string 1 then there is a permutation
         '''
