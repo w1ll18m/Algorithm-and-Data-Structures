@@ -62,8 +62,13 @@ attempt 3:
 during the first iteration, deep copy the linked list by following the next pointers (ignore random pointers)
 during the second iteration, for each old_node, iterate through both the original and copy until we find the node that matches the random pointer -> O(n^n) time
 
-attempt 4 (using hint 3):
+attempt 4 (using hint 2):
 hint 3 says to use extra space to keep a mapping of old_node -> new_node to prevent creating multiple copies of the same node
 during the first iteration, deep copy the linked list by following the next pointers but keep a dictionary mapping old_node to new_node
 during the second iteration, for each old_node, we find the new_node.random associated with old_node.random using the mapping -> O(n) time
+
+BETTER SOLUTION:
+We can avoid using extra space for old_node ---> new_node mapping by tweaking the original linked list. 
+Simply interweave the nodes of the old and copied list. 
+For example: Old List: A --> B --> C --> D InterWeaved List: A --> A' --> B --> B' --> C --> C' --> D --> D'
 '''
