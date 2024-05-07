@@ -35,6 +35,7 @@ class Solution(object):
         return level_order
     
     '''
+    pattern: traverse through tree by level -> BFS
     using collection.deque() might be faster than using queue.Queue()
     '''
 
