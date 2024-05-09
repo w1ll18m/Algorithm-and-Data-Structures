@@ -7,24 +7,19 @@ class TreeNode:
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if p.val < q.val:
-            lower = p
-            upper = q
-        else:
-            lower = q
-            upper = p
-        
-        return self.findLCA(root, lower, upper)
+        return self.findLCA(root, min(p.val, q.val), max(p.val, q.val))
     
-    def findLCA(self, root, lower, upper):
-        if not root:
-            return None
-        elif lower.val <= root.val and upper.val >= root.val:
-            return root
+    def findLCA(self, node, lower, upper):
+        if lower <= node.val <= upper:
+            return node
+        elif node.val < lower:
+            return self.findLCA(node.right, lower, upper)
         else:
-            return self.findLCA(root.left, lower, upper) or self.findLCA(root.right, lower, upper)
+            return self.findLCA(node.left, lower, upper)
 
     '''
-    binary search tree -> left subtree < root and right subtree > root
+    binary search tree -> left subtree < node and right subtree > node
     a node is considered the LCA <==> p and q are not both in the same subtree <==> node is less than p and greater than q
+    if current node is less than p and q then search to the right
+    if current node is greater than p and q then search to the left
     '''
