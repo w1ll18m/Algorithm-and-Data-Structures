@@ -37,7 +37,7 @@ class Solution(object):
         return longest_substring
 
         '''
-        pattern: find the max subarray that has no repeating characters -> sliding window
+        pattern: find the longest (max) subarray that has no repeating characters -> sliding window
 
         condition to stop expanding the window: see a repeated character
         while expanding: keep track of seen characters and their position (can use hashing for O(1) check)

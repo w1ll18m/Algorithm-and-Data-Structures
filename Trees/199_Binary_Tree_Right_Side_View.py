@@ -32,4 +32,7 @@ class Solution:
             right_view.append(right_node.val)
         
         return right_view
-        
+    
+    '''
+    need to find right most element at each level -> traverse through tree by level -> BFS
+    '''
