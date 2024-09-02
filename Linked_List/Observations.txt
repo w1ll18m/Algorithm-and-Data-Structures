@@ -1,0 +1,20 @@
+Reverse Linked List
+    1. initialize pointers prev = None (or dummy) and cur = head
+    2. iterate through the list and let cur.next = prev
+
+    - useful for anytime we need to traverse the list backwards in O(1) space complexity
+
+Using Stack (aka Array)
+    - useful for anytime we need to traverse the list backwards in O(n) space complexity
+    - can keep valid nodes in stack and reconstruct new list by popping
+
+Slow/Fast Pointers
+    1. initialize pointers slow = head and fast = head.next
+    2. while fast is not None and fast.next is not None then increment slow by 1 and fast by 2
+    3. slow should be at: last node of first half of even list
+                          middle node of odd list
+    Note that if we start with fast = head then slow should be at first node of second half of even list
+
+    - used to find the middle of a linked list
+    - used to find if a cycle exists in a linked list
+    - useful for anytime we need to work with both sides of a linked list
