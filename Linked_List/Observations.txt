@@ -7,6 +7,8 @@ Reverse Linked List
 Using Stack (aka Array)
     - useful for anytime we need to traverse the list backwards in O(n) space complexity
     - can keep valid nodes in stack and reconstruct new list by popping
+        - preserve the original relative order of the nodes
+        - NOTE THIS CAN ALSO BE ACCOMPLISHED USING A LIST WITH A DUMMY HEAD
 
 Slow/Fast Pointers
     1. initialize pointers slow = head and fast = head.next
