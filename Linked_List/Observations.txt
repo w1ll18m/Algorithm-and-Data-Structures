@@ -6,9 +6,10 @@ Reverse Linked List
 
 Using Stack (aka Array)
     - useful for anytime we need to traverse the list backwards in O(n) space complexity
-    - can keep valid nodes in stack and reconstruct new list by popping
+    - can keep track of sublist nodes by adding them to stack (reconstruct new list by popping)
+        - ex. return valid nodes that satisfy a condition
         - preserve the original relative order of the nodes
-        - NOTE THIS CAN ALSO BE ACCOMPLISHED USING A LIST WITH A DUMMY HEAD
+        - NOTE THIS CAN ALSO BE ACCOMPLISHED USING A LINKED LIST WITH A DUMMY HEAD
 
 Slow/Fast Pointers
     1. initialize pointers slow = head and fast = head.next
@@ -20,3 +21,5 @@ Slow/Fast Pointers
     - used to find the middle of a linked list
     - used to find if a cycle exists in a linked list
     - useful for anytime we need to work with both sides of a linked list
+
+Note: Dummy nodes are very useful for keeping track of the head of a modified list!!!
