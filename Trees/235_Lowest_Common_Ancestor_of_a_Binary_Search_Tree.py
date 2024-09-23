@@ -1,25 +1,31 @@
 # Definition for a binary tree node.
 class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
-
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        return self.findLCA(root, min(p.val, q.val), max(p.val, q.val))
+        cur = root
+        while True:
+            # current node is not LCA, traverse to left subtree
+            if cur.val > p.val and cur.val > q.val:
+                cur = cur.left
+            # current node is not LCA, traverse to right subtreez
+            elif cur.val < p.val and cur.val < q.val:
+                cur = cur.right
+            # conditions are not true so current node is LCA
+            else:
+                return cur
     
-    def findLCA(self, node, lower, upper):
-        if lower <= node.val <= upper:
-            return node
-        elif node.val < lower:
-            return self.findLCA(node.right, lower, upper)
-        else:
-            return self.findLCA(node.left, lower, upper)
-
     '''
-    binary search tree -> left subtree < node and right subtree > node
-    a node is considered the LCA <==> p and q are not both in the same subtree <==> node is less than p and greater than q
-    if current node is less than p and q then search to the right
-    if current node is greater than p and q then search to the left
+    given a binary search tree, find the lowest common ancestor of 2 given nodes
+    assume that p and q will exist in the BST,s p != q, and all node.val are unique
+
+    observe that for a given node n:
+        - n is not the LCA if n.val > p and n.val > q
+            - traverse to the left subtree
+        - n is not the LCA if n.val < p and n.val < q
+            - traverse to the right subtree
+    so we traverse the list until we find the first node such that those conditions are not true -> O(log n)
     '''
