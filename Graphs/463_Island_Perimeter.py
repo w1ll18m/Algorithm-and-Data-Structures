@@ -1,63 +1,52 @@
 from typing import List
-from collections import deque
 
 class Solution:
     def islandPerimeter(self, grid: List[List[int]]) -> int:
-        # find the size of row and col
-        row = len(grid)
-        col = len(grid[0])
-        # define transformations to get neighbours
-        neighbours = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        nofrows = len(grid)
+        nofcols = len(grid[0])
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-        perimeter = 0
-        # maintain a queue of unexplored cells
-        queue = deque()
-        # maintain a set of explored cells
-        seen = set()
+        def dfs(i, j):
+            # case: cell is not valid, water, or visited
+            if i < 0 or i >= nofrows or j < 0 or j >= nofcols or grid[i][j] == 0 or grid[i][j] == -1:
+                return 0
+            
+            # case: cell is land and unvisited
+            perimeter = 0
+            grid[i][j] = -1     # mark the current cell as visited
 
-        # find the first land cell then break (explore all cells in worst case)
-        for i in range(row):
-            if len(queue) > 0:
-                break
-            for j in range(col):
+            # check if neighbour cells are not land
+            if i == 0 or grid[i-1][j] == 0:
+                perimeter += 1
+            if i == nofrows - 1 or grid[i+1][j] == 0:
+                perimeter += 1
+            if j == 0 or grid[i][j-1] == 0:
+                perimeter += 1
+            if j == nofcols - 1 or grid[i][j+1] == 0:
+                perimeter += 1
+            
+            # recurse on neighbours
+            for direction in directions:
+                i2, j2 = i + direction[0], j + direction[1]
+                perimeter += dfs(i2, j2)
+            
+            return perimeter
+        
+        # find and recurse on the first land cell
+        for i in range(nofrows):
+            for j in range(nofcols):
                 if grid[i][j] == 1:
-                    queue.append((i, j))
-                    seen.add((i, j))
-                    break
-        
-        while len(queue) != 0:
-            cell = queue.popleft()
-
-            for neighbour in neighbours:
-                ncell = (cell[0] + neighbour[0], cell[1] + neighbour[1])
-
-                # case 1: neighbour cell has already been explored
-                if ncell in seen:
-                    continue
-
-                # case 2: neighbour cell is not valid -> current cell has border edge
-                if not (0 <= ncell[0] < row) or not (0 <= ncell[1] < col):
-                    perimeter += 1
-                    continue
-                
-                # case 3: neighbour cell is valid and is water
-                if grid[ncell[0]][ncell[1]] == 0:
-                    perimeter += 1
-                # case 4: neighbour cell is valid and is land
-                else:
-                    queue.append(ncell)
-                    seen.add(ncell)
-        
-        return perimeter
-
+                    return dfs(i, j)
+            
     '''
     grid[i][j] = 1 represents land and grid[i][j] = 0 represents water
     find the perimeter of the island (only 1)
 
-    we want to explore all land cells -> BFS
+    we want to explore all land cells -> DFS
     how much a perimeter that a land cell contributes is determined by:
     (1) +1 to perimeter for every neighbour cell thats water
     (2) +1 to perimeter for every edge that is on the border (ex. i = 0, i = row - 1, j = 0, j = col - 1)
+    we can mark a visited cell as -1 to ensure O(1) space complexity
     
     find the size of row and col in the grid -> O(1) time
     for each cell, check at most 4 neighbours -> O(1) per cell
