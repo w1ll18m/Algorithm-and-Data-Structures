@@ -1,0 +1,13 @@
+Palindrome Checking
+    - check if a string reads the same forward and backwards
+    - initiates pointers at both ends and compare while moving towards the center
+
+Sorted Arrays
+    - provides a way to eliminate possibilities 
+    - initiates pointers at both ends and decide which direction to move the pointers efficiently
+    - reduces the time complexity to O(n) or O(nlogn) compared to O(n^2) for brute force approach
+    - ex. (i) smallest difference (adjacent elements) + largest difference (first and last elements)
+
+Q: when should we consider sorting for two pointers? 
+A: (i) order of elements do not need to be preserved
+   (ii) minimize or maximize differences
