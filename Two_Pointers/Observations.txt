@@ -16,3 +16,16 @@ Merging/Comparing Sorted Lists
 Q: when should we consider sorting for two pointers? 
 A: (i) order of elements do not need to be preserved
    (ii) minimize or maximize differences
+
+Reversing Arrays In-Place
+    - [HOW] initiates pointers at both ends and swap while moving towards the center
+
+Reversal Algorithm for Array Rotation:
+    (1) assume that we want to rotate an array by k positions
+        ex. [1, 2, 3, 4, 5] -> [4, 5, 1, 2, 3] where k = 2
+    (2) reverse the entire array
+        ex. [1, 2, 3, 4, 5] -> [5, 4, 3, 2, 1]
+        - we want the last k elements to be the first k elements!!!
+    (3) reverse the first k elements and the remaining elements
+        ex. [4, 5] + [1, 2, 3] -> [4, 5, 1, 2, 3]
+        - reverse subarrays independently to achieve original ordering
